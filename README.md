@@ -18,7 +18,7 @@ The issue with using SQL to retrieve all iMessage data is that for certain types
 To install imessage-tools, run the following command:
 
 ```
-pip install git+https://github.com/my-other-github/imessage_tools.git
+pip install git+https://github.com/my-other-github-account/imessage_tools.git
 ```
 # Reading Messages
 
