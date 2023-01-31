@@ -69,7 +69,7 @@ def print_messages(messages):
         print("\n")
 
 
-def send_message(message, phone_number):
+def send_message(message, phone_number, group_chat = False):
     # creating a file - note: text files end up being sent as normal text messages, so this is handy for
     # sending messages that osascript doesn't like due to strange formatting or characters
     file_path = os.path.abspath('imessage_tmp.txt')
@@ -77,7 +77,7 @@ def send_message(message, phone_number):
     with open(file_path, 'w') as f:
         f.write(message)
 
-    if not 'chat' in phone_number[:4]:
+    if not group_chat:
         command = f'tell application "Messages" to send (read (POSIX file "{file_path}") as «class utf8») to buddy "{phone_number}"'
     else:
         command = f'tell application "Messages" to send (read (POSIX file "{file_path}") as «class utf8») to chat "{phone_number}"'
