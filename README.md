@@ -48,6 +48,7 @@ The output format of the messages returned by the get_messages function is a lis
 - "phone_number": the phone number or id of the person who sent the message, as it appears in the handle.id field in the database
 - "is_from_me": a Boolean value indicating whether the message was sent by the user or received from someone else
 - "cache_roomname": None if it is not a group chat, otherwise the group ID of the group the message was sent in. Some methods need this guid to send group texts, but for this repository you just use the group name
+- "group_chat_name": None if it is not a group chat, otherwise the group Name (assuming you have given it a display name) of the group the message was sent in.
 - "date": the date the message was sent, either as a time stamp or in a human-readable format, depending on the value of the human_readable_date argument passed to the function.
 
 The dictionaries in the list are sorted by date in ascending order, so that the most recent messages are at the end of the list. 
