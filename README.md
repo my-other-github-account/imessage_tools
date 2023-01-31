@@ -25,7 +25,7 @@ pip install git+https://github.com/my-other-github-account/imessage_tools.git
 To read messages, you can use the read_messages function. This function takes three required arguments:
 
 - db_location - The path to the chat.db file
-- n - The number of messages to return (defaults to 10 if not provided)
+- n - The number of messages to return (defaults to 10 if not provided, will return all messages if set to None)
 - self_number - A string representing your phone number or a label for "you" in the messages. Can be arbitrary.
 - human_readable_date - A Boolean indicating whether to return the message timestamps as timestamps or human-readable dates (defaults to human-readable)
 
