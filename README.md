@@ -71,9 +71,9 @@ print_messages(messages)
 
 # Reply to the last message, regardless of whether an individual, or a group chat messaged you:
 if messages[-1]["group_chat_name"]:
-    send_message("Hello iMessage!", messages[-1]["group_chat_name"], True)
+    send_message("Hello iMessage Group!", messages[-1]["group_chat_name"], True)
 else:
-    send_message("Hello iMessage!", messages[-1]["phone_number"], False)
+    send_message("Hello iMessage Buddy!", messages[-1]["phone_number"], False)
 
 ```
 
