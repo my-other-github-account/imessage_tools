@@ -3,6 +3,18 @@ import datetime
 import subprocess
 import os
 
+def get_chat_mapping(db_location):
+    conn = sqlite3.connect(db_location)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT room_name, display_name FROM chat")
+    result_set = cursor.fetchall()
+
+    mapping = {room_name: display_name for room_name, display_name in result_set}
+
+    conn.close()
+
+    return mapping
 def read_messages(db_location, n=10, self_number='Me', human_readable_date=True):
     conn = sqlite3.connect(db_location)
     cursor = conn.cursor()
@@ -50,9 +62,16 @@ def read_messages(db_location, n=10, self_number='Me', human_readable_date=True)
             new_date = int((date+unix_timestamp)/1000000000)
             date = datetime.datetime.fromtimestamp(new_date).strftime("%Y-%m-%d %H:%M:%S")
 
+        mapping = get_chat_mapping(db_location)
+
+        try:
+            mapped_name = mapping[cache_roomname]
+        except:
+            mapped_name = None
+
         messages.append(
             {"rowid": rowid, "date": date, "body": body, "phone_number": phone_number, "is_from_me": is_from_me,
-             "cache_roomname": cache_roomname})
+             "cache_roomname": cache_roomname, 'group_chat_name' : mapped_name})
 
     conn.close()
     return messages
@@ -65,6 +84,7 @@ def print_messages(messages):
         print(f"Phone Number: {message['phone_number']}")
         print(f"Is From Me: {message['is_from_me']}")
         print(f"Cache Roomname: {message['cache_roomname']}")
+        print(f"Group Chat Name: {message['group_chat_name']}")
         print(f"Date: {message['date']}")
         print("\n")
 

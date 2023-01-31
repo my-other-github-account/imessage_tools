@@ -64,12 +64,17 @@ self_number = "Me"
 n = 10
 
 # Read the messages
-messages = read_messages(chat_db, n=10, self_number='Me', human_readable_date=True)
+messages = read_messages(chat_db, n=n, self_number=self_number, human_readable_date=True)
 
 # Print the messages
 print_messages(messages)
 
-send_message("Hello iMessage!", messages[-1]["phone_number"], messages[-1]["cache_roomname"])
+# Reply to the last message, regardless of whether an individual, or a group chat messaged you:
+if messages[-1]["group_chat_name"]:
+    send_message("Hello iMessage!", messages[-1]["group_chat_name"], True)
+else:
+    send_message("Hello iMessage!", messages[-1]["phone_number"], False)
+
 ```
 
 ### Closing notes:
